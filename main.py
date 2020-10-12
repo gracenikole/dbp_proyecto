@@ -21,7 +21,8 @@ class Usuario(db.Model):
     user_name = db.Column(db.String)
     email = db.Column(db.String)
     password = db.Column(db.String)
-    todos = db.relationship("Todo", back_populates="usuario")
+    todos = db.relationship('Todo', backref='usuario', lazy=True)
+
 
     def __repr__(self):  # optional
         return f'Forma {self.name}'
@@ -34,6 +35,8 @@ class Todo(db.Model):
     fecha = db.Column(db.String)
     is_done = db.Column(db.Boolean, unique=False, default=True)
     parent = db.relationship("Usuario", back_populates="todos")
+    Usuario_id = db.Column(db.Integer, db.ForeignKey('usuario.id'),nullable=False)
+
     # https://flask-sqlalchemy.palletsprojects.com/en/2.x/models/
 
     def __repr__(self):  # optional
