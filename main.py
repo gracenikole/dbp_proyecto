@@ -34,8 +34,7 @@ class Todo(db.Model):
     descripcion = db.Column(db.String, nullable=False)
     fecha = db.Column(db.String, unique=True, nullable=False)
     is_done = db.Column(db.Boolean, unique=False, default=True)
-    parent = db.relationship("Usuario", back_populates="todos")
-    Usuario_id = db.Column(db.Integer, db.ForeignKey('usuario.id'),nullable=False)
+    usuario_id = db.Column(db.Integer, db.ForeignKey('usuario.id'),nullable=False)
 
     # https://flask-sqlalchemy.palletsprojects.com/en/2.x/models/
 
@@ -43,9 +42,14 @@ class Todo(db.Model):
         return f'todos {self.name}'
 
     
-diego = Usuario(user_name = "pepito1", email = "correo@correo",password = "1234")    
-    
+diego = Usuario(user_name = "nicanorjkjhkj", email = "correo1jkhjkhkj",password = "123456")    
+limpiar = Todo(descripcion = "limpiar cuarto", fecha = "ayerjhhjj ",usuario = diego)       
 
 db.create_all()
 
-print(1)
+db.session.add(diego)
+db.session.add(limpiar)
+db.session.commit() 
+
+print(4)
+
