@@ -18,9 +18,9 @@ class Usuario(db.Model):
     __tablename__ = 'usuario'
 
     id = db.Column(db.Integer, primary_key=True)
-    user_name = db.Column(db.String)
-    email = db.Column(db.String)
-    password = db.Column(db.String)
+    user_name = db.Column(db.String, unique=True, nullable=False)
+    email = db.Column(db.String, unique=True, nullable=False)
+    password = db.Column(db.String, nullable=False)
     todos = db.relationship('Todo', backref='usuario', lazy=True)
 
 
@@ -31,8 +31,8 @@ class Usuario(db.Model):
 class Todo(db.Model):
     __tablename__ = 'todo'
     id = db.Column(db.Integer, primary_key=True)
-    descripcion = db.Column(db.String)
-    fecha = db.Column(db.String)
+    descripcion = db.Column(db.String, nullable=False)
+    fecha = db.Column(db.String, unique=True, nullable=False)
     is_done = db.Column(db.Boolean, unique=False, default=True)
     parent = db.relationship("Usuario", back_populates="todos")
     Usuario_id = db.Column(db.Integer, db.ForeignKey('usuario.id'),nullable=False)
