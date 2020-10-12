@@ -17,11 +17,11 @@ app, db = inciar()
 class Usuario(db.Model):
     __tablename__ = 'usuario'
 
-    id = db.Column(Integer, primary_key=True)
-    user_name = db.Column(String)
-    email = db.Column(String)
-    password = db.Column(String)
-    todos = relationship("Todo", back_populates="usuario")
+    id = db.Column(db.Integer, primary_key=True)
+    user_name = db.Column(db.String)
+    email = db.Column(db.String)
+    password = db.Column(db.String)
+    todos = db.relationship("Todo", back_populates="usuario")
 
     def __repr__(self):  # optional
         return f'Forma {self.name}'
@@ -29,11 +29,12 @@ class Usuario(db.Model):
 
 class Todo(db.Model):
     __tablename__ = 'todo'
-    id = Column(Integer, primary_key=True)
-    descripcion = db.Column(String)
-    fecha = db.Column(Date)
-    is_done = db.Column(bool)
-    parent = relationship("Usuario", back_populates="todos")
+    id = db.Column(db.Integer, primary_key=True)
+    descripcion = db.Column(db.String)
+    fecha = db.Column(db.String)
+    is_done = db.Column(db.Boolean, unique=False, default=True)
+    parent = db.relationship("Usuario", back_populates="todos")
+    # https://flask-sqlalchemy.palletsprojects.com/en/2.x/models/
 
     def __repr__(self):  # optional
         return f'todos {self.name}'
