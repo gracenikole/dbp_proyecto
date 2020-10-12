@@ -42,6 +42,9 @@ class Todo(db.Model):
     def __repr__(self):  # optional
         return f'todos {self.name}'
 
+    
+diego = Usuario(user_name = "pepito1", email = "correo@correo",password = "1234")    
+    
 
 db.create_all()
 
